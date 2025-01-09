@@ -75,6 +75,15 @@ class GhostAdmin
     handle_response(response)['posts'][0]
   end
 
+  def copy_post(post_id)
+    response = self.class.post(
+      "#{@base_url}/posts/#{post_id}/copy",
+      headers: @headers
+    )
+
+    handle_response(response)['posts'][0]
+  end
+
   def update_post(post_id, updated_data)
     response = self.class.put(
       "#{@base_url}/posts/#{post_id}/",
@@ -121,7 +130,7 @@ begin
 
   post_id = 'xxxxxxxxxxxxxxxxxxxxxxxx'
 
-  ap ghost.get_post(post_id)
+  ap ghost.copy_post(post_id)
 rescue => e
   puts "Fatal error: #{e.message}"
 end
